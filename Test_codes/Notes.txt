@@ -1,0 +1,10 @@
+Create all Spectograms sets:
+    1. Noise
+    2. Noise + Waveform = Signal
+    3. Waveform
+
+
+Divide 1 & 2 into training data and testing data. 
+
+Train the Data on all 3. 
+
