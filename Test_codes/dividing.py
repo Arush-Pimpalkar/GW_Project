@@ -3,8 +3,8 @@ import shutil
 import random
 
 # Define paths to the original dataset and destination directories
-original_dataset_dir = "/home/arush/GW_Test_1/Data_Generation/DATA_V2/mass_30_30"
-base_dir = "/home/arush/GW_Test_1/Model_Training/Data_v3"
+original_dataset_dir = "/home/arush/GW_Project_1/Data_Generation/Continous_Check"
+base_dir = "/home/arush/GW_Project_1/Model_Training/Continous_Data"
 
 # Create directories for train, test, and validation sets
 train_dir = os.path.join(base_dir, "train")
@@ -15,7 +15,7 @@ os.makedirs(test_dir, exist_ok=True)
 os.makedirs(validation_dir, exist_ok=True)
 
 # Define the names of the classes
-classes = ["5_to_8", "8_to_11", "11_to_14","14_to_17","17_to_20", "noise"]
+classes = ["Data", "noise"]
 
 # Define the ratio for train, test, and validation sets
 train_ratio = 0.8
