@@ -26,7 +26,6 @@ def load_labels_from_directory(directory):
                     snr = 0  # Label for noise
                 labels.append(snr)
                 filenames.append(os.path.join(root, filename))
-    np.random.shuffle(labels)
     return np.array(labels), filenames
 
 
@@ -42,43 +41,58 @@ labels_noise, filenames_noise = load_labels_from_directory(
 labels = np.concatenate((labels_data, labels_noise))
 filenames = np.concatenate((filenames_data, filenames_noise))
 
-# Shuffle the data
-np.random.shuffle(labels)
-np.random.shuffle(filenames)
+combined = list(zip(labels, filenames))
 
-print(len(labels))
-print(len(filenames))
+random.seed(42)
+random.shuffle(combined)
+
+labels, filenames = zip(*combined)
+
+labels = np.array(labels)
+filenames = np.array(filenames)
+
+print("total dataset: ", len(labels))
+
+
+# function to find the number of files in train, test and validation set
+train_len = int(0.8 * len(labels))
+test_len = int(0.1 * len(labels))
+val_len = len(labels) - train_len - test_len
+
+print("training dataset length: ", train_len)
+print("testing dataset length: ", test_len)
+print("validation dataset length: ", val_len)
 
 i = 0
 with open(
     "/home/arush/GW_Project_1/Data_Generation/Continous_Check/cont_data_train.csv",
-    "a",
+    "w",
     newline="",
 ) as file:
     writer = csv.writer(file)
     writer.writerow(["Label", "Path"])
-    while i < 7071:
+    while i < train_len:
         writer.writerow([labels[i], filenames[i]])
         i += 1
 
 with open(
     "/home/arush/GW_Project_1/Data_Generation/Continous_Check/cont_data_test.csv",
-    "a",
+    "w",
     newline="",
 ) as file:
     writer = csv.writer(file)
     writer.writerow(["Label", "Path"])
-    while i < 7955:
+    while i < train_len + test_len:
         writer.writerow([labels[i], filenames[i]])
         i += 1
 
 with open(
     "/home/arush/GW_Project_1/Data_Generation/Continous_Check/cont_data_val.csv",
-    "a",
+    "w",
     newline="",
 ) as file:
     writer = csv.writer(file)
     writer.writerow(["Label", "Path"])
-    while i < 8839:
+    while i < len(labels):
         writer.writerow([labels[i], filenames[i]])
         i += 1
