@@ -24,7 +24,7 @@ def get_chirp_masses(filename):
     return None
 
 
-filename = "/home/arush/GW_Project_1/Data_Generation/Continous_Check/cont_data_val.csv"
+filename = "/home/arush/GW_Project_1/Data_Generation/Continous_Check/cont_data_test.csv"
 
 # Read the CSV content
 with open(filename, "r") as infile:
